@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Sprint | GDD & Protótipo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Neon Sprint | Case de Desenvolvimento Unity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0c10;
-            --surface-color: #1f2833;
-            --neon-blue: #66fcf1;
-            --neon-blue-dim: #45a29e;
-            --text-main: #c5c6c7;
-            --text-light: #ffffff;
+            --primary-color: #2563eb; /* Azul corporativo/tech */
+            --primary-hover: #1d4ed8;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
         }
 
         * {
@@ -22,135 +23,143 @@
         }
 
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--text-light);
-        }
-
-        /* HEADER & HERO */
+        /* HEADER */
         header {
-            padding: 2rem 5%;
+            background-color: var(--bg-card);
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(102, 252, 241, 0.2);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
         }
 
-        .hero {
-            text-align: center;
-            padding: 6rem 5%;
-            background: radial-gradient(circle at center, #1f2833 0%, #0b0c10 70%);
+        .logo span {
+            color: var(--primary-color);
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            color: var(--neon-blue);
-            text-shadow: 0 0 20px rgba(102, 252, 241, 0.6);
-            letter-spacing: 4px;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
-            color: var(--text-main);
-        }
-
+        /* BUTTONS */
         .btn-group {
             display: flex;
             gap: 1rem;
             justify-content: center;
+            margin-top: 2rem;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
+            padding: 10px 24px;
+            font-size: 1rem;
+            font-weight: 500;
             text-decoration: none;
-            text-transform: uppercase;
-            border: 2px solid var(--neon-blue);
-            color: var(--neon-blue);
-            background: transparent;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            border-radius: 6px;
+            transition: all 0.2s ease;
             cursor: pointer;
         }
 
-        .btn:hover, .btn.primary {
-            background: var(--neon-blue);
-            color: var(--bg-color);
-            box-shadow: 0 0 15px var(--neon-blue);
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: 1px solid var(--primary-color);
         }
 
-        /* SECTIONS */
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 6rem 5%;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+        }
+
+        /* MAIN CONTENT */
         section {
-            padding: 5rem 5%;
-            max-width: 1200px;
+            padding: 4rem 5%;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 3rem;
-            color: var(--text-light);
-            position: relative;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--neon-blue);
-            margin: 10px auto 0;
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        /* GRID LAYOUTS */
+        /* GRID & CARDS */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
+            gap: 2rem;
         }
 
         .card {
-            background: var(--surface-color);
-            padding: 2rem;
+            background-color: var(--bg-card);
+            padding: 2.5rem;
             border-radius: 8px;
-            border-left: 4px solid var(--neon-blue);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
 
         .card h3 {
-            color: var(--neon-blue);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
         }
 
         .card ul {
@@ -158,115 +167,118 @@
         }
 
         .card ul li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
             padding-left: 1.5rem;
             position: relative;
-            font-size: 1.1rem;
         }
 
         .card ul li::before {
-            content: '▹';
-            color: var(--neon-blue);
+            content: '✓';
+            color: var(--primary-color);
             position: absolute;
             left: 0;
-            font-size: 1.2rem;
+            font-weight: bold;
         }
 
-        /* DEV/CONTACT SECTION */
-        .dev-contact {
-            background: var(--surface-color);
+        .card ul li strong {
+            color: var(--text-dark);
+        }
+
+        /* CONTACT SECTION */
+        .dev-profile {
+            background-color: var(--bg-card);
             padding: 3rem;
-            text-align: center;
             border-radius: 8px;
-            border: 1px solid rgba(102, 252, 241, 0.2);
-            margin-top: 2rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
         }
 
-        .dev-contact h2 {
+        .dev-profile h2 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
         }
 
-        .dev-contact p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+        .dev-profile p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
         }
 
         /* FOOTER */
         footer {
             text-align: center;
             padding: 2rem;
-            border-top: 1px solid rgba(102, 252, 241, 0.2);
-            margin-top: 3rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
             font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
             .grid-2 { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
-            .btn-group { flex-direction: column; }
+            .hero h1 { font-size: 2.25rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Neon Sprint</div>
-        <a href="#repositorio" class="btn">GitHub</a>
+        <div class="logo">Neon<span>Sprint</span></div>
+        <a href="#repositorio" class="btn btn-outline">Repositório GitHub</a>
     </header>
 
     <div class="hero">
-        <h1>NEON SPRINT</h1>
-        <p>Um Endless Runner 2D cyberpunk com foco em reflexos rápidos, simplicidade técnica e execução ágil na Unity.</p>
+        <h1>Protótipo: Endless Runner 2D</h1>
+        <p>Um estudo de caso em Unity 2D focado em arquitetura escalável, controles responsivos e execução ágil sob a ótica da programação orientada a objetos.</p>
         <div class="btn-group">
-            <a href="#sobre" class="btn primary">Ver Documentação (GDD)</a>
-            <a href="#contato" class="btn">Contato do Desenvolvedor</a>
+            <a href="#gdd" class="btn btn-primary">Ver Documentação (GDD)</a>
+            <a href="#contato" class="btn btn-outline">Perfil do Desenvolvedor</a>
         </div>
     </div>
 
-    <section id="sobre">
-        <h2 class="section-title">Visão Geral do Projeto</h2>
+    <section id="gdd">
+        <h2 class="section-title">Visão Técnica do Projeto</h2>
+        
         <div class="grid-2">
-            <div>
-                <p style="font-size: 1.2rem; margin-bottom: 1.5rem;"><strong>Neon Sprint</strong> é um jogo arcade de ritmo acelerado estruturado para ser um protótipo funcional polido em um ciclo de desenvolvimento de 1 semana. O jogador controla um corredor futurista que se desloca automaticamente em um ambiente cyberpunk, desviando de obstáculos gerados proceduralmente.</p>
-                
-                <div class="card" style="margin-top: 2rem;">
-                    <h3>Ficha Técnica</h3>
-                    <ul>
-                        <li><strong>Engine:</strong> Unity 2D (C#)</li>
-                        <li><strong>Gênero:</strong> Endless Runner / Plataforma</li>
-                        <li><strong>Plataforma:</strong> PC / WebGL / Mobile</li>
-                        <li><strong>Foco:</strong> Controles responsivos e movimentação parallax.</li>
-                    </ul>
-                </div>
+            <div class="card">
+                <h3>Escopo e Ferramentas</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Projeto estruturado para um ciclo de desenvolvimento rápido (1 semana), priorizando a fundação mecânica sobre a complexidade visual, ideal para demonstração de portfólio técnico.</p>
+                <ul>
+                    <li><strong>Engine:</strong> Unity 2D (C#)</li>
+                    <li><strong>Design Pattern:</strong> Orientação a Objetos, Object Pooling</li>
+                    <li><strong>Plataforma-Alvo:</strong> PC / WebGL / Mobile</li>
+                    <li><strong>Persistência:</strong> PlayerPrefs para armazenamento local de high-scores.</li>
+                </ul>
             </div>
             
             <div class="card">
-                <h3>Core Loop & Mecânicas</h3>
+                <h3>Core Mechanics</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Lógica de jogo implementada utilizando a física nativa da Unity e manipulação de Transforms para eficiência.</p>
                 <ul>
-                    <li><strong>Avançar:</strong> Cenário contínuo simulando corrida de alta velocidade.</li>
-                    <li><strong>Reagir:</strong> Tomada de decisão em frações de segundo para pular obstáculos rasteiros ou deslizar sob barreiras aéreas.</li>
-                    <li><strong>Pontuar:</strong> Escala de pontuação progressiva vinculada ao tempo de sobrevivência, registrada via `PlayerPrefs`.</li>
-                    <li><strong>Escalonamento:</strong> A velocidade global do mundo aumenta a cada 15 segundos, elevando a dificuldade passivamente.</li>
+                    <li><strong>Movimentação Parallax:</strong> Cenário contínuo otimizado para simular velocidade e progressão constante.</li>
+                    <li><strong>Controles Físicos:</strong> Interações baseadas em `Rigidbody2D` e `BoxCollider2D` para pulos e manobras de agachamento.</li>
+                    <li><strong>Spawn Procedural:</strong> Geração randômica de obstáculos gerenciada via rotinas padronizadas e otimização de memória.</li>
+                    <li><strong>Curva de Dificuldade:</strong> Escalonamento matemático global que aumenta a velocidade a cada 15 segundos.</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <section id="contato">
-        <h2 class="section-title">Repositório & Contato</h2>
-        <div class="dev-contact">
+        <div class="dev-profile">
             <h2>Desenvolvido por Sergio</h2>
-            <p>Projeto de portfólio documentado e estruturado para demonstrar arquitetura de código limpa em C# e proficiência com componentes 2D da Unity (Rigidbodies, Colliders, Tilemaps, Object Pooling e UI).</p>
+            <p>Desenvolvedor focado na criação de lógicas consistentes, arquitetura limpa em C# e uso eficiente das ferramentas da Unity Engine. Este projeto atua como demonstração de boas práticas na estruturação e documentação de protótipos de jogos.</p>
             
-            <div class="btn-group" style="margin-top: 1.5rem;">
-                <a href="mailto:contato@exemplo.com" class="btn primary">Enviar E-mail</a>
-                <a href="#" class="btn">Acessar Repositório</a>
+            <div class="btn-group">
+                <a href="mailto:contato@exemplo.com" class="btn btn-primary">Entrar em Contato</a>
+                <a href="#" class="btn btn-outline">Ver Outros Projetos</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Neon Sprint Project. Criado para fins de demonstração de portfólio.</p>
+        <p>&copy; 2026 Sergio. Portfolio Técnico de Desenvolvimento Unity.</p>
     </footer>
 
 </body>
