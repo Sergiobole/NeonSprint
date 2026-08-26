@@ -1,62 +1,61 @@
-# Neon Sprint — Game Design Document (GDD)
-
-> **Documento de Design de Jogo:** Endless Runner 2D (Foco em Simplicidade e Execução Rápida)
+# GDD: Neon Sprint — Documento de Design de Jogo & Checklist
 
 | Metadado | Detalhes |
 | :--- | :--- |
 | **Gênero** | Endless Runner / Plataforma 2D |
 | **Plataforma** | PC / WebGL / Mobile |
 | **Engine** | Unity 2D |
-| **Escopo Estimado** | 1 Semana (Protótipo Funcional) |
+| **Status do Projeto** | Em Desenvolvimento |
 
 ---
 
 ## 1. Visão Geral e Objetivo
-
-**Neon Sprint** é um jogo arcade de ritmo acelerado onde o jogador controla um corredor futurista que se desloca automaticamente em um ambiente cyberpunk. O objetivo é desviar de obstáculos saltando ou abaixando, acumulando a maior pontuação possível antes de colidir.
-
-O foco deste projeto é manter a simplicidade técnica, utilizando controles responsivos e lógica direta sem sistemas complexos de física ou combate.
+**Neon Sprint** é um jogo arcade de ritmo acelerado onde o jogador controla um corredor que se desloca automaticamente em um cenário contínuo. O objetivo é desviar de obstáculos saltando ou agachando, acumulando pontuação progressiva antes de colidir.
 
 ---
 
 ## 2. Core Loop (Ciclo de Jogo)
-
-* **Avançar:** O cenário se move continuamente da direita para a esquerda, simulando corrida constante.
-* **Reagir:** O jogador pressiona comandos para pular (obstáculos baixos) ou abaixar (obstáculos altos).
-* **Pontuar:** O escore aumenta proporcionalmente ao tempo de sobrevivência e distância percorrida.
-* **Falhar / Reiniciar:** A colisão com qualquer obstáculo resulta em tela de Game Over instantânea com exibição de recorde.
+* **Avançar:** Cenário em movimento contínuo via Parallax simulando velocidade constante.
+* **Reagir:** Tomada de decisão instantânea para pular barreiras baixas ou agachar sob obstáculos altos.
+* **Pontuar:** Incremento proporcional de pontos baseado no tempo de vida e distância percorrida.
+* **Falhar / Reiniciar:** Colisão imediata com obstáculo aciona tela de Game Over e salva o recorde.
 
 ---
 
 ## 3. Mecânicas Principais e Controles
-
-* **Movimento Automático:** A velocidade do mundo aumenta progressivamente a cada 15 segundos.
-* **Pulo (Jump):** Tecla `Espaço` ou `Seta para Cima`. Permite transpor barreiras rasteiras. *(Opcional: Salto duplo para flexibilidade)*.
-* **Agachamento (Slide/Duck):** Tecla `Ctrl` ou `Seta para Baixo`. Reduz temporariamente a altura do colisor do personagem para passar sob barreiras aéreas.
-* **Persistência:** Registro automático do recorde máximo local via `PlayerPrefs`.
+* **Movimentação Automática:** A velocidade do mundo aumenta progressivamente a cada 15 segundos.
+* **Pulo (Jump):** Tecla `Espaço` ou `Seta para Cima` (com suporte a pulo duplo opcional).
+* **Agachamento (Slide/Duck):** Tecla `Ctrl` ou `Seta para Baixo`, reduzindo a hitbox do `BoxCollider2D`.
+* **Persistência:** Registro local da maior pontuação atingida através de `PlayerPrefs`.
 
 ---
 
-## 4. Roadmap de Desenvolvimento & Checklist
-
-Cronograma estruturado para entrega do protótipo funcional em até 7 dias:
+## 4. Roadmap de Desenvolvimento & Checklist de Conclusão
 
 ### Fase 1: Configuração Inicial e Cenário (Dias 1 e 2)
-- [ ] **Criar Projeto Unity 2D:** Configurar resolução padrão (ex: 1920x1080) e pastas organizadas (`Scripts`, `Sprites`, `Prefabs`).
-- [ ] **Cenário de Fundo (Parallax):** Configurar camadas de fundo (céu, prédios distantes, chão) movendo-se em velocidades diferentes.
-- [ ] **Configurar o Chão (Ground):** Adicionar Tilemap ou sprite de chão com `BoxCollider2D` e tag `"Ground"`.
+| Tarefa | Descrição Detalhada | Status | Concluído em |
+| :--- | :--- | :---: | :---: |
+| **Setup do Projeto Unity 2D** | Configurar resolução padrão (1920x1080), tags, layers e estrutura de pastas (`Scripts`, `Sprites`, `Prefabs`, `Scenes`). | [ ] Finalizado | ____/____/2026 |
+| **Cenário Parallax (Fundo)** | Implementar camadas de background com scripts de repetição e velocidades diferenciadas para profundidade. | [ ] Finalizado | ____/____/2026 |
+| **Piso e Colisores Base** | Criar Tilemap ou sprites para a plataforma de chão com `BoxCollider2D` e tag `"Ground"`. | [ ] Finalizado | ____/____/2026 |
 
 ### Fase 2: Personagem e Controles (Dias 3 e 4)
-- [ ] **Setup do Player:** Criar GameObject com `SpriteRenderer`, `Rigidbody2D` e `BoxCollider2D`.
-- [ ] **Script de Movimento e Pulo:** Programar detecção de tecla de espaço e aplicação de força vertical com verificação de solo.
-- [ ] **Mecânica de Agachamento:** Ajustar escala ou tamanho do `BoxCollider2D` ao segurar a tecla para baixo.
+| Tarefa | Descrição Detalhada | Status | Concluído em |
+| :--- | :--- | :---: | :---: |
+| **Setup do Player GameObject** | Adicionar componentes `SpriteRenderer`, `Rigidbody2D` (Freeze Rotation Z) e `BoxCollider2D`. | [ ] Finalizado | ____/____/2026 |
+| **Script de Pulo e GroundCheck** | Implementar força vertical e detecção precisa de contato com o chão via `Physics2D.OverlapCircle` ou Raycast. | [ ] Finalizado | ____/____/2026 |
+| **Mecânica de Agachamento (Slide)** | Reduzir dinamicamente a altura/offset do `BoxCollider2D` ao acionar a tecla de agachar. | [ ] Finalizado | ____/____/2026 |
 
 ### Fase 3: Obstáculos e Sistema de Jogo (Dias 5 e 6)
-- [ ] **Prefabs de Obstáculos:** Criar variações de obstáculos rasteiros e altos. Transformá-los em Prefabs reutilizáveis.
-- [ ] **Script Spawner (Gerador):** Criar rotina em loop para instanciar obstáculos à direita da tela em intervalos de tempo aleatórios.
-- [ ] **Sistema de Colisão e Morte:** Detectar colisão do player com obstáculos para congelar o jogo e acionar a tela de Game Over.
+| Tarefa | Descrição Detalhada | Status | Concluído em |
+| :--- | :--- | :---: | :---: |
+| **Prefabs de Obstáculos** | Criar variações de obstáculos rasteiros e aéreos com seus respectivos `BoxCollider2D` configurados como Trigger. | [ ] Finalizado | ____/____/2026 |
+| **Spawner & Object Pooling** | Implementar rotina em loop para instanciar ou reaproveitar obstáculos em intervalos de tempo randômicos. | [ ] Finalizado | ____/____/2026 |
+| **Detecção de Colisão e Morte** | Programar gatilho `OnTriggerEnter2D` para pausar o jogo e disparar o evento de derrota (*Game Over*). | [ ] Finalizado | ____/____/2026 |
 
 ### Fase 4: UI, Pontuação e Polimento (Dia 7)
-- [ ] **Interface de Pontuação (UI):** Adicionar TextMeshPro na tela mostrando o score atual e salvar recorde com `PlayerPrefs`.
-- [ ] **Menu de Game Over:** Criar tela simples com botão de "Reiniciar" e pontuação final.
-- [ ] **Testes e Ajustes Finais:** Ajustar gravidade, velocidade de corrida e hitbox para garantir fluidez e diversão.
+| Tarefa | Descrição Detalhada | Status | Concluído em |
+| :--- | :--- | :---: | :---: |
+| **Interface de Pontuação (HUD)** | Integrar TextMeshPro para contagem de tempo/distância em tempo real e salvar Recorde com `PlayerPrefs`. | [ ] Finalizado | ____/____/2026 |
+| **Painel de Game Over & Restart** | Criar tela com score final, recorde atual e botão de reinício recarregando a cena via `SceneManager`. | [ ] Finalizado | ____/____/2026 |
+| **Ajustes Finais e Game Feel** | Calibrar velocidade de aceleração do mundo, gravidade e feedback sonoro/partículas ao saltar e colidir. | [ ] Finalizado | ____/____/2026 |
