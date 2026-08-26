@@ -7,19 +7,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2563eb; /* Azul corporativo/tech */
+            --primary-color: #2563eb;
             --primary-hover: #1d4ed8;
             --bg-main: #f8fafc;
             --bg-card: #ffffff;
             --text-dark: #0f172a;
             --text-muted: #475569;
             --border-color: #e2e8f0;
+            --header-height: 70px;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--header-height);
         }
 
         body {
@@ -29,17 +35,20 @@
             line-height: 1.6;
         }
 
-        /* HEADER */
+        /* HEADER & NAVBAR */
         header {
-            background-color: var(--bg-card);
-            padding: 1rem 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            height: var(--header-height);
+            padding: 0 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .logo {
@@ -47,24 +56,43 @@
             font-weight: 700;
             color: var(--text-dark);
             letter-spacing: -0.5px;
+            text-decoration: none;
         }
 
         .logo span {
             color: var(--primary-color);
         }
 
-        /* BUTTONS */
-        .btn-group {
+        .navbar {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
+            gap: 2rem;
         }
 
+        .navbar a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        /* BUTTONS */
         .btn {
-            display: inline-block;
-            padding: 10px 24px;
-            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 20px;
+            font-size: 0.95rem;
             font-weight: 500;
             text-decoration: none;
             border-radius: 6px;
@@ -98,35 +126,54 @@
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
+            min-height: calc(100vh - var(--header-height) - 100px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -1px;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
             color: var(--text-dark);
             margin-bottom: 1.2rem;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .hero p {
             font-size: 1.25rem;
             color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
         }
 
         /* MAIN CONTENT */
         section {
-            padding: 4rem 5%;
+            padding: 5rem 5%;
             max-width: 1100px;
             margin: 0 auto;
+            border-top: 1px solid var(--border-color);
         }
 
         .section-title {
             text-align: center;
             font-size: 2rem;
-            margin-bottom: 3rem;
-            font-weight: 600;
+            margin-bottom: 1rem;
+            font-weight: 700;
             letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3.5rem;
+            font-size: 1.1rem;
         }
 
         /* GRID & CARDS */
@@ -136,30 +183,36 @@
             gap: 2rem;
         }
 
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
         .card {
             background-color: var(--bg-card);
             padding: 2.5rem;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         .card h3 {
             font-size: 1.25rem;
             color: var(--text-dark);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 1rem;
         }
 
-        .card h3::before {
-            content: '';
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background-color: var(--primary-color);
-            border-radius: 2px;
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
         }
 
         .card ul {
@@ -167,10 +220,11 @@
         }
 
         .card ul li {
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             color: var(--text-muted);
             padding-left: 1.5rem;
             position: relative;
+            font-size: 0.95rem;
         }
 
         .card ul li::before {
@@ -181,28 +235,100 @@
             font-weight: bold;
         }
 
-        .card ul li strong {
+        /* CHECKLIST STYLES */
+        .phase-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            font-weight: 600;
+            border-radius: 8px 8px 0 0;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .checklist-container {
+            overflow-x: auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .checklist-table th, .checklist-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        .checklist-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
             color: var(--text-dark);
+        }
+
+        .checklist-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checklist-table tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .task-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .task-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .status-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .date-input {
+            padding: 6px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            color: var(--text-muted);
+            background-color: #f8fafc;
+            width: 130px;
         }
 
         /* CONTACT SECTION */
         .dev-profile {
             background-color: var(--bg-card);
-            padding: 3rem;
-            border-radius: 8px;
+            padding: 4rem 3rem;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
             text-align: center;
+            background-image: linear-gradient(to right, #f8fafc, #ffffff);
         }
 
         .dev-profile h2 {
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
         }
 
         .dev-profile p {
             color: var(--text-muted);
             max-width: 600px;
-            margin: 0 auto 2rem auto;
+            margin: 0 auto 2.5rem auto;
+            font-size: 1.1rem;
         }
 
         /* FOOTER */
@@ -211,68 +337,276 @@
             padding: 2rem;
             color: var(--text-muted);
             border-top: 1px solid var(--border-color);
-            margin-top: 4rem;
+            background-color: var(--bg-card);
             font-size: 0.9rem;
         }
 
-        @media (max-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.25rem; }
+        /* RESPONSIVO */
+        @media (max-width: 900px) {
+            .navbar { display: none; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR FIXA -->
     <header>
-        <div class="logo">Neon<span>Sprint</span></div>
-        <a href="#repositorio" class="btn btn-outline">Repositório GitHub</a>
+        <a href="#home" class="logo">Neon<span>Sprint</span></a>
+        
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#sobre">Visão Geral</a>
+            <a href="#arquitetura">Arquitetura & Engine</a>
+            <a href="#mecanicas">Core Mechanics</a>
+            <a href="#roadmap">Checklist</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="#contato" class="btn btn-primary">Falar com Desenvolvedor</a>
+        </div>
     </header>
 
-    <div class="hero">
+    <!-- HERO SECTION -->
+    <div id="home" class="hero">
         <h1>Protótipo: Endless Runner 2D</h1>
         <p>Um estudo de caso em Unity 2D focado em arquitetura escalável, controles responsivos e execução ágil sob a ótica da programação orientada a objetos.</p>
-        <div class="btn-group">
-            <a href="#gdd" class="btn btn-primary">Ver Documentação (GDD)</a>
-            <a href="#contato" class="btn btn-outline">Perfil do Desenvolvedor</a>
+        <div class="hero-buttons">
+            <a href="#roadmap" class="btn btn-primary">Acompanhar Progresso</a>
+            <a href="https://github.com" target="_blank" class="btn btn-outline">Repositório GitHub</a>
         </div>
     </div>
 
-    <section id="gdd">
-        <h2 class="section-title">Visão Técnica do Projeto</h2>
+    <!-- SEÇÃO 1: VISÃO GERAL -->
+    <section id="sobre">
+        <h2 class="section-title">O Projeto</h2>
+        <p class="section-subtitle">Por que este protótipo foi desenvolvido?</p>
         
+        <div class="grid-3">
+            <div class="card">
+                <h3>Objetivo</h3>
+                <p>Demonstrar capacidade técnica de entregar um ciclo completo de jogo (*Core Loop*) polido em um curto período (1 semana).</p>
+            </div>
+            <div class="card">
+                <h3>Abordagem</h3>
+                <p>Priorização da fundação mecânica e da estrutura de código em C# sobre a complexidade visual e criação de assets.</p>
+            </div>
+            <div class="card">
+                <h3>Resultado</h3>
+                <p>Um Endless Runner funcional, livre de bugs de colisão, com curva de dificuldade matemática e sistema de salvamento nativo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: ARQUITETURA -->
+    <section id="arquitetura">
+        <h2 class="section-title">Arquitetura & Ferramentas</h2>
+        <p class="section-subtitle">Padrões de projeto e tecnologias utilizadas</p>
+
         <div class="grid-2">
             <div class="card">
-                <h3>Escopo e Ferramentas</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Projeto estruturado para um ciclo de desenvolvimento rápido (1 semana), priorizando a fundação mecânica sobre a complexidade visual, ideal para demonstração de portfólio técnico.</p>
+                <h3>Stack & Engine</h3>
                 <ul>
-                    <li><strong>Engine:</strong> Unity 2D (C#)</li>
-                    <li><strong>Design Pattern:</strong> Orientação a Objetos, Object Pooling</li>
-                    <li><strong>Plataforma-Alvo:</strong> PC / WebGL / Mobile</li>
-                    <li><strong>Persistência:</strong> PlayerPrefs para armazenamento local de high-scores.</li>
+                    <li><strong>Engine:</strong> Unity 2022/2023 (Pipeline 2D)</li>
+                    <li><strong>Linguagem:</strong> C# moderno</li>
+                    <li><strong>Plataformas-Alvo:</strong> PC, WebGL (Browser) e Mobile</li>
+                    <li><strong>Persistência de Dados:</strong> Implementação do `PlayerPrefs` para *High-Scores* locais.</li>
                 </ul>
             </div>
-            
             <div class="card">
-                <h3>Core Mechanics</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Lógica de jogo implementada utilizando a física nativa da Unity e manipulação de Transforms para eficiência.</p>
+                <h3>Design Patterns em C#</h3>
                 <ul>
-                    <li><strong>Movimentação Parallax:</strong> Cenário contínuo otimizado para simular velocidade e progressão constante.</li>
-                    <li><strong>Controles Físicos:</strong> Interações baseadas em `Rigidbody2D` e `BoxCollider2D` para pulos e manobras de agachamento.</li>
-                    <li><strong>Spawn Procedural:</strong> Geração randômica de obstáculos gerenciada via rotinas padronizadas e otimização de memória.</li>
-                    <li><strong>Curva de Dificuldade:</strong> Escalonamento matemático global que aumenta a velocidade a cada 15 segundos.</li>
+                    <li><strong>Object Pooling:</strong> Reutilização de prefabs (obstáculos) para evitar pico de uso do *Garbage Collector*.</li>
+                    <li><strong>Singletons:</strong> Gerenciamento centralizado de *GameManager* e sistema de áudio/UI.</li>
+                    <li><strong>Component-Based:</strong> Separação estrita de responsabilidades (ex: `PlayerMovement`, `PlayerCollision`, `ScoreManager`).</li>
                 </ul>
             </div>
         </div>
     </section>
 
+    <!-- SEÇÃO 3: MECÂNICAS -->
+    <section id="mecanicas">
+        <h2 class="section-title">Core Mechanics</h2>
+        <p class="section-subtitle">Como as interações físicas foram implementadas</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>Movimentação & Física</h3>
+                <p>Lógica desenhada para garantir a melhor "sensação" (*game feel*) ao jogador.</p>
+                <ul>
+                    <li><strong>Cenário Parallax:</strong> Otimizado via manipulação de `Transform` e texturas em repetição (`Wrap Mode`).</li>
+                    <li><strong>Pulo (Jump):</strong> Cálculo híbrido usando `Rigidbody2D.AddForce` com multiplicadores para quedas mais rápidas.</li>
+                    <li><strong>Hitboxes Dinâmicas:</strong> Redução do `BoxCollider2D` via código durante o estado de "agachamento".</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Sistemas de Jogo</h3>
+                <p>Regras e progressão gerenciadas autonomamente.</p>
+                <ul>
+                    <li><strong>Spawn Procedural:</strong> Rotinas (`Coroutines`) que variam o intervalo e o tipo de obstáculo baseado no tempo de vida.</li>
+                    <li><strong>Escalonamento (Scaling):</strong> Variável global de `Time.timeScale` ou multiplicador de velocidade que aumenta gradativamente.</li>
+                    <li><strong>Game Over State:</strong> Congelamento imediato de interações e exibição assíncrona de painéis de UI (`Canvas`).</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 4: ROADMAP E CHECKLIST -->
+    <section id="roadmap">
+        <h2 class="section-title">Roadmap & Checklist</h2>
+        <p class="section-subtitle">Acompanhamento das tarefas estruturadas do GDD original</p>
+
+        <!-- FASE 1 -->
+        <div class="phase-header">Fase 1: Configuração Inicial e Cenário</div>
+        <div class="checklist-container">
+            <table class="checklist-table">
+                <thead>
+                    <tr>
+                        <th style="width: 8%; text-align: center;">Status</th>
+                        <th style="width: 30%;">Tarefa</th>
+                        <th style="width: 45%;">Descrição Detalhada</th>
+                        <th style="width: 17%;">Data de Conclusão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Setup do Projeto Unity 2D</td>
+                        <td class="task-desc">Configurar resolução padrão (1920x1080), tags, layers e estrutura de pastas.</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Cenário Parallax (Fundo)</td>
+                        <td class="task-desc">Implementar camadas de background com scripts de repetição e velocidades diferenciadas.</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Piso e Colisores Base</td>
+                        <td class="task-desc">Criar Tilemap ou sprites para a plataforma de chão com BoxCollider2D e tag "Ground".</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FASE 2 -->
+        <div class="phase-header">Fase 2: Personagem e Controles</div>
+        <div class="checklist-container">
+            <table class="checklist-table">
+                <thead>
+                    <tr>
+                        <th style="width: 8%; text-align: center;">Status</th>
+                        <th style="width: 30%;">Tarefa</th>
+                        <th style="width: 45%;">Descrição Detalhada</th>
+                        <th style="width: 17%;">Data de Conclusão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Setup do Player GameObject</td>
+                        <td class="task-desc">Adicionar componentes SpriteRenderer, Rigidbody2D e BoxCollider2D.</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Script de Pulo e GroundCheck</td>
+                        <td class="task-desc">Implementar força vertical e detecção de chão via Physics2D.OverlapCircle.</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Mecânica de Agachamento</td>
+                        <td class="task-desc">Reduzir dinamicamente a hitbox do BoxCollider2D ao acionar a tecla de agachar.</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FASE 3 -->
+        <div class="phase-header">Fase 3: Obstáculos e Sistema de Jogo</div>
+        <div class="checklist-container">
+            <table class="checklist-table">
+                <thead>
+                    <tr>
+                        <th style="width: 8%; text-align: center;">Status</th>
+                        <th style="width: 30%;">Tarefa</th>
+                        <th style="width: 45%;">Descrição Detalhada</th>
+                        <th style="width: 17%;">Data de Conclusão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Prefabs de Obstáculos</td>
+                        <td class="task-desc">Criar variações rasteiras e aéreas com BoxCollider2D (Trigger).</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Spawner & Object Pooling</td>
+                        <td class="task-desc">Rotina em loop para instanciar/reaproveitar obstáculos randomicamente.</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Detecção de Colisão e Morte</td>
+                        <td class="task-desc">Programar gatilho OnTriggerEnter2D para pausar o jogo.</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FASE 4 -->
+        <div class="phase-header">Fase 4: UI, Pontuação e Polimento</div>
+        <div class="checklist-container">
+            <table class="checklist-table">
+                <thead>
+                    <tr>
+                        <th style="width: 8%; text-align: center;">Status</th>
+                        <th style="width: 30%;">Tarefa</th>
+                        <th style="width: 45%;">Descrição Detalhada</th>
+                        <th style="width: 17%;">Data de Conclusão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Interface de Pontuação (HUD)</td>
+                        <td class="task-desc">TextMeshPro para contagem em tempo real e save com PlayerPrefs.</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Painel de Game Over</td>
+                        <td class="task-desc">Criar tela com score final e botão de reinício (SceneManager).</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="status-checkbox"></td>
+                        <td class="task-name">Ajustes Finais e Game Feel</td>
+                        <td class="task-desc">Calibrar velocidade, gravidade e feedback visual/sonoro.</td>
+                        <td><input type="date" class="date-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 5: CONTATO -->
     <section id="contato">
         <div class="dev-profile">
             <h2>Desenvolvido por Sergio</h2>
-            <p>Desenvolvedor focado na criação de lógicas consistentes, arquitetura limpa em C# e uso eficiente das ferramentas da Unity Engine. Este projeto atua como demonstração de boas práticas na estruturação e documentação de protótipos de jogos.</p>
+            <p>Desenvolvedor focado na criação de lógicas consistentes, arquitetura limpa em C# e uso eficiente das ferramentas da Unity Engine. Em busca de desafios envolvendo programação de *gameplay* e sistemas escaláveis.</p>
             
-            <div class="btn-group">
-                <a href="mailto:contato@exemplo.com" class="btn btn-primary">Entrar em Contato</a>
-                <a href="#" class="btn btn-outline">Ver Outros Projetos</a>
+            <div class="hero-buttons" style="justify-content: center; margin-top: 2rem;">
+                <a href="mailto:contato@exemplo.com" class="btn btn-primary">Enviar E-mail Comercial</a>
+                <a href="https://linkedin.com" target="_blank" class="btn btn-outline">Perfil no LinkedIn</a>
             </div>
         </div>
     </section>
